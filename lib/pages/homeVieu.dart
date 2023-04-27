@@ -1,17 +1,30 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kmckkkkkk/pages/second_page.dart';
 
-class Sear extends StatefulWidget {
-  const SearchView({super.key});
+class HomeVieu extends StatefulWidget {
+  const HomeVieu({super.key});
 
   @override
-  _SearchViewState createState() => _SearchViewState();
+  State<HomeVieu> createState() => _HomeVieuState();
 }
-class _SearchViewState extends State<SearchView> {
-  Future<Position> _getPosition() async {
+
+class _HomeVieuState extends State<HomeVieu> {
+  @override
+  void initState() {
+    showWeather();
+    super.initState();
+  }
+
+  Future<void> showWeather() async {
+    final position = await getPosition();
+    log('Position latitude ===> ${position.latitude}');
+    log('Position longitude ===> ${position.longitude}');
+  }
+
+  Future<Position> getPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -48,9 +61,7 @@ class _SearchViewState extends State<SearchView> {
     return await Geolocator.getCurrentPosition();
   }
 
-class _homeVieuState extends State<homeVieu> {
   @override
-  
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -79,8 +90,6 @@ class _homeVieuState extends State<homeVieu> {
               ))
         ],
       ),
-
-
       body: Container(
           width: double.infinity,
           height: double.infinity,

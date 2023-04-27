@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmckkkkkk/pages/fristPege.dart';
 import 'package:kmckkkkkk/pages/homeVieu.dart';
 
 void main(List<String> args) {
@@ -13,7 +14,7 @@ class weater extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: homeVieu(),
+      home: firstPages(),
     );
   }
 }

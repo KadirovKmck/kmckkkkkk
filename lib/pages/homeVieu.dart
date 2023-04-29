@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:kmckkkkkk/pages/second_page.dart';
 
 class HomeVieu extends StatefulWidget {
@@ -12,6 +16,9 @@ class HomeVieu extends StatefulWidget {
 }
 
 class _HomeVieuState extends State<HomeVieu> {
+  String garada = '';
+  double gradus = 6;
+  //  final random = math.Random().nextInt(6) + 1
   @override
   void initState() {
     showWeather();
@@ -20,8 +27,25 @@ class _HomeVieuState extends State<HomeVieu> {
 
   Future<void> showWeather() async {
     final position = await getPosition();
+    WeatherAppMap(position);
     log('Position latitude ===> ${position.latitude}');
     log('Position longitude ===> ${position.longitude}');
+  }
+
+  WeatherAppMap(Position position) async {
+    var client = http.Client();
+    Uri uri = Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=3a86e66bf53ada002d5efc51f8ef98b0');
+
+    final DanyuJopp = await client.get(uri);
+    log('Danyu Joop ===> ${DanyuJopp.body}');
+    final jsonJoop = jsonDecode(DanyuJopp.body);
+    log('json Joop ===> $jsonJoop.body');
+    garada = jsonJoop['name'];
+    log('garada ====> $garada');
+    gradus = jsonJoop['main']['temp'];
+    log('gradus ===> $jsonJoop');
+    setState(() {});
   }
 
   Future<Position> getPosition() async {
@@ -103,7 +127,7 @@ class _HomeVieuState extends State<HomeVieu> {
                 bottom: 700,
                 left: 60,
                 child: Text(
-                  '6°C',
+                  '$gradus',
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),
@@ -167,7 +191,7 @@ class _HomeVieuState extends State<HomeVieu> {
                 right: 150,
                 bottom: 20,
                 child: Text(
-                  'Osh',
+                  garada,
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),

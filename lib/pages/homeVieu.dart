@@ -17,7 +17,7 @@ class HomeVieu extends StatefulWidget {
 
 class _HomeVieuState extends State<HomeVieu> {
   String garada = '';
-  double gradus = 6;
+  double dus = 1;
   //  final random = math.Random().nextInt(6) + 1
   @override
   void initState() {
@@ -43,8 +43,8 @@ class _HomeVieuState extends State<HomeVieu> {
     log('json Joop ===> $jsonJoop.body');
     garada = jsonJoop['name'];
     log('garada ====> $garada');
-    gradus = jsonJoop['main']['temp'];
-    log('gradus ===> $jsonJoop');
+    dus = jsonJoop['main']['temp'];
+    log('dus ===> $jsonJoop');
     setState(() {});
   }
 
@@ -119,7 +119,7 @@ class _HomeVieuState extends State<HomeVieu> {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/hi.jpg'), fit: BoxFit.cover),
+                image: AssetImage('images/kkkk.png'), fit: BoxFit.cover),
           ),
           child: Stack(
             children: [
@@ -127,7 +127,7 @@ class _HomeVieuState extends State<HomeVieu> {
                 bottom: 700,
                 left: 60,
                 child: Text(
-                  '$gradus',
+                  '$dus ',
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),
@@ -191,7 +191,7 @@ class _HomeVieuState extends State<HomeVieu> {
                 right: 150,
                 bottom: 20,
                 child: Text(
-                  garada,
+                  '$garada',
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),

@@ -29,7 +29,7 @@ class _SecondPageState extends State<SecondPage> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('images/moon.jpg'), fit: BoxFit.cover),
+              image: AssetImage('images/kmcck.jpg'), fit: BoxFit.cover),
         ),
         child: Center(
           child: Padding(

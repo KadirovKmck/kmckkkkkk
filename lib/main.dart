@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmckkkkkk/constants/api.dart';
 import 'package:kmckkkkkk/pages/fristPege.dart';
 import 'package:kmckkkkkk/pages/homeVieu.dart';
 
@@ -15,6 +16,7 @@ class weater extends StatelessWidget {
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: firstPages(),
+      // home: MyApp(),
     );
   }
 }

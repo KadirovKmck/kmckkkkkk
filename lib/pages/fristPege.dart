@@ -21,20 +21,6 @@ class _firstPagesState extends State<firstPages> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeVieu(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.location_on,
-            size: 40,
-          ),
-        ),
       ),
       body: Container(
         width: double.infinity,
@@ -112,6 +98,22 @@ class _firstPagesState extends State<firstPages> {
           ),
           SizedBox(
             height: 25,
+          ),
+          Container(
+            height: 30,
+            width: 250,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25), color: Colors.blue),
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeVieu()));
+              },
+              child: Text(
+                'Register',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
           ),
         ]),
       ),

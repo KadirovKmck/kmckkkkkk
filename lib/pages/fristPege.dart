@@ -32,7 +32,7 @@ class _firstPagesState extends State<firstPages> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           DefaultTextStyle(
             style: const TextStyle(
-              fontSize: 30.0,
+              fontSize: 50.0,
             ),
             child: Center(
               child: AnimatedTextKit(
@@ -47,7 +47,7 @@ class _firstPagesState extends State<firstPages> {
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 40,
           ),
           Center(
             child: Padding(
@@ -97,13 +97,13 @@ class _firstPagesState extends State<firstPages> {
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 45,
           ),
           Container(
-            height: 30,
+            height: 45,
             width: 250,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25), color: Colors.blue),
+                borderRadius: BorderRadius.circular(10), color: Colors.blue),
             child: TextButton(
               onPressed: () {
                 Navigator.push(context,
@@ -111,7 +111,7 @@ class _firstPagesState extends State<firstPages> {
               },
               child: Text(
                 'Register',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           ),

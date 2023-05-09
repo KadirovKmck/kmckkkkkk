@@ -17,7 +17,7 @@ class HomeVieu extends StatefulWidget {
 
 class _HomeVieuState extends State<HomeVieu> {
   String garada = '';
-  double dus = 1;
+  double dus = 0;
   //  final random = math.Random().nextInt(6) + 1
   @override
   void initState() {
@@ -45,6 +45,8 @@ class _HomeVieuState extends State<HomeVieu> {
     log('garada ====> $garada');
     dus = jsonJoop['main']['temp'];
     log('dus ===> $jsonJoop');
+    final kilvin = jsonJoop['main']['temp'];
+    dus = kilvin - 275;
     setState(() {});
   }
 
@@ -127,7 +129,7 @@ class _HomeVieuState extends State<HomeVieu> {
                 bottom: 700,
                 left: 60,
                 child: Text(
-                  '$dus ',
+                  '${dus.toStringAsFixed(0)}',
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),

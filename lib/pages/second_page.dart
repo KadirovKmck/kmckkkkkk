@@ -8,6 +8,8 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  TextEditingController textFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +41,7 @@ class _SecondPageState extends State<SecondPage> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   TextField(
+                    controller: textFieldController,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -47,7 +50,7 @@ class _SecondPageState extends State<SecondPage> {
                           borderRadius: BorderRadius.circular(12)),
                       suffixIcon: IconButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            _sendDataBack(context);        
                           },
                           icon: Icon(Icons.arrow_forward_ios_outlined)),
                       border: OutlineInputBorder(
@@ -65,5 +68,10 @@ class _SecondPageState extends State<SecondPage> {
         ),
       ),
     );
+  }
+
+  void _sendDataBack(BuildContext context) {
+    String textToSendBack = textFieldController.text;
+    Navigator.pop(context, textToSendBack);
   }
 }

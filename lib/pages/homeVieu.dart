@@ -18,6 +18,9 @@ class HomeVieu extends StatefulWidget {
 class _HomeVieuState extends State<HomeVieu> {
   String garada = '';
   double dus = 0;
+  String countri = '';
+  double countru = 0;
+  String text = 'Countru';
   //  final random = math.Random().nextInt(6) + 1
   @override
   void initState() {
@@ -28,6 +31,7 @@ class _HomeVieuState extends State<HomeVieu> {
   Future<void> showWeather() async {
     final position = await getPosition();
     WeatherAppMap(position);
+    // GaradaaApp();
     log('Position latitude ===> ${position.latitude}');
     log('Position longitude ===> ${position.longitude}');
   }
@@ -36,17 +40,32 @@ class _HomeVieuState extends State<HomeVieu> {
     var client = http.Client();
     Uri uri = Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=3a86e66bf53ada002d5efc51f8ef98b0');
-
     final DanyuJopp = await client.get(uri);
-    log('Danyu Joop ===> ${DanyuJopp.body}');
+    // log('Danyu Joop ===> ${DanyuJopp.body}');
     final jsonJoop = jsonDecode(DanyuJopp.body);
-    log('json Joop ===> $jsonJoop.body');
+    // log('json Joop ===> $jsonJoop.body');
     garada = jsonJoop['name'];
-    log('garada ====> $garada');
+    // log('garada ====> $garada');
     dus = jsonJoop['main']['temp'];
-    log('dus ===> $jsonJoop');
+    // log('dus ===> $jsonJoop');
     final kilvin = jsonJoop['main']['temp'];
     dus = kilvin - 275;
+    countri = jsonJoop['sys']['country'];
+    GaradaaApp();
+    setState(() {});
+  }
+    
+    
+
+  GaradaaApp() async {
+    var client = http.Client();
+    Uri uur = Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=osh&appid=3a86e66bf53ada002d5efc51f8ef98b0');
+    final CitiJoop = await client.get(uur);
+    final CountryAnswer = jsonDecode(CitiJoop.body);
+    countru = CountryAnswer['main']['temp'];
+    final kilvin = CountryAnswer['main']['temp'];
+    countru = kilvin - 275;
     setState(() {});
   }
 
@@ -54,12 +73,8 @@ class _HomeVieuState extends State<HomeVieu> {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
       return Future.error('Location services are disabled.');
     }
 
@@ -67,11 +82,6 @@ class _HomeVieuState extends State<HomeVieu> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
         return Future.error('Location permissions are denied');
       }
     }
@@ -82,8 +92,6 @@ class _HomeVieuState extends State<HomeVieu> {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
 
@@ -95,20 +103,17 @@ class _HomeVieuState extends State<HomeVieu> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: Icon(
-              Icons.location_on,
+              Icons.location_city,
               size: 40,
             )),
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SecondPage(),
-                  ),
-                );
+                _awaitReturnValueFromSecondScreen(context);
               },
               icon: Icon(
                 Icons.map_sharp,
@@ -129,7 +134,22 @@ class _HomeVieuState extends State<HomeVieu> {
                 bottom: 700,
                 left: 60,
                 child: Text(
-                  '${dus.toStringAsFixed(0)}',
+                  '${countri}',
+                  style: TextStyle(fontSize: 50, color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(42.0),
+                child: Text(
+                  text,
+                  style: TextStyle(fontSize: 50),
+                ),
+              ),
+              Positioned(
+                bottom: 20,
+                left: 30,
+                child: Text(
+                  '$countri',
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),
@@ -193,12 +213,27 @@ class _HomeVieuState extends State<HomeVieu> {
                 right: 150,
                 bottom: 20,
                 child: Text(
-                  '$garada',
+                  text,
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),
             ],
           )),
+    );
+  }
+
+  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
+    // start the SecondScreen and wait for it to finish with a result
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SecondPage(),
+        ));
+
+    // after the SecondScreen result comes back update the Text widget with it
+    setState(() {
+      text = result;
+    }
     );
   }
 }

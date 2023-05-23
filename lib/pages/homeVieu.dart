@@ -19,8 +19,9 @@ class _HomeVieuState extends State<HomeVieu> {
   String garada = '';
   double dus = 0;
   String countri = '';
-  double countru = 0;
-  String text = 'Countru';
+  double temper = 0;
+  // double countru = 0;
+  // String temperatura = '';
   //  final random = math.Random().nextInt(6) + 1
   @override
   void initState() {
@@ -31,7 +32,6 @@ class _HomeVieuState extends State<HomeVieu> {
   Future<void> showWeather() async {
     final position = await getPosition();
     WeatherAppMap(position);
-    // GaradaaApp();
     log('Position latitude ===> ${position.latitude}');
     log('Position longitude ===> ${position.longitude}');
   }
@@ -51,21 +51,24 @@ class _HomeVieuState extends State<HomeVieu> {
     final kilvin = jsonJoop['main']['temp'];
     dus = kilvin - 275;
     countri = jsonJoop['sys']['country'];
-    GaradaaApp();
     setState(() {});
   }
-    
-    
 
-  GaradaaApp() async {
+  Future<void> GaradaaApp({String? Gorod}) async {
     var client = http.Client();
     Uri uur = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=osh&appid=3a86e66bf53ada002d5efc51f8ef98b0');
-    final CitiJoop = await client.get(uur);
-    final CountryAnswer = jsonDecode(CitiJoop.body);
-    countru = CountryAnswer['main']['temp'];
-    final kilvin = CountryAnswer['main']['temp'];
-    countru = kilvin - 275;
+        'https://api.openweathermap.org/data/2.5/weather?q=$Gorod&appid=3a86e66bf53ada002d5efc51f8ef98b0');
+    final DanyuJopp = await client.get(uur);
+    // log('Danyu Joop ===> ${DanyuJopp.body}');
+    final jsonJoop = jsonDecode(DanyuJopp.body);
+    // log('json Joop ===> $jsonJoop.body');
+    garada = jsonJoop['name'];
+    // log('garada ====> $garada');
+    dus = jsonJoop['main']['temp'];
+    // log('dus ===> $jsonJoop');
+    final kilvin = jsonJoop['main']['temp'];
+    dus = kilvin - 275;
+    countri = jsonJoop['sys']['country'];
     setState(() {});
   }
 
@@ -112,8 +115,10 @@ class _HomeVieuState extends State<HomeVieu> {
             )),
         actions: [
           IconButton(
-              onPressed: () {
-                _awaitReturnValueFromSecondScreen(context);
+              onPressed: () async {
+                var result = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SecondPage()));
+                GaradaaApp(Gorod: result);
               },
               icon: Icon(
                 Icons.map_sharp,
@@ -134,15 +139,8 @@ class _HomeVieuState extends State<HomeVieu> {
                 bottom: 700,
                 left: 60,
                 child: Text(
-                  '${countri}',
+                  '${dus.toStringAsFixed(0)}',
                   style: TextStyle(fontSize: 50, color: Colors.white),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(42.0),
-                child: Text(
-                  text,
-                  style: TextStyle(fontSize: 50),
                 ),
               ),
               Positioned(
@@ -213,27 +211,12 @@ class _HomeVieuState extends State<HomeVieu> {
                 right: 150,
                 bottom: 20,
                 child: Text(
-                  text,
+                  garada,
                   style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),
             ],
           )),
-    );
-  }
-
-  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
-    // start the SecondScreen and wait for it to finish with a result
-    final result = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SecondPage(),
-        ));
-
-    // after the SecondScreen result comes back update the Text widget with it
-    setState(() {
-      text = result;
-    }
     );
   }
 }

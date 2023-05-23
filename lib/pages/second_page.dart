@@ -36,6 +36,7 @@ class _SecondPageState extends State<SecondPage> {
         child: Center(
           child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0),
+              
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kmckkkkkk/constants/api.dart';
 import 'package:kmckkkkkk/pages/fristPege.dart';
-import 'package:kmckkkkkk/pages/homeVieu.dart';
 
 void main(List<String> args) {
   runApp(weater());

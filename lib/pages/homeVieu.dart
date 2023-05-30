@@ -1,11 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:kmckkkkkk/pages/second_page.dart';
 
 class HomeVieu extends StatefulWidget {
@@ -131,7 +128,7 @@ class _HomeVieuState extends State<HomeVieu> {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/kkkk.png'), fit: BoxFit.cover),
+                image: AssetImage('assets/images/kkkk.png'), fit: BoxFit.cover),
           ),
           child: Stack(
             children: [
@@ -140,12 +137,12 @@ class _HomeVieuState extends State<HomeVieu> {
                 left: 60,
                 child: Text(
                   '${dus.toStringAsFixed(0)}',
-                  style: TextStyle(fontSize: 50, color: Colors.white),
+                  style: TextStyle(fontSize: 50, color: Colors.white),       
                 ),
               ),
               Positioned(
-                bottom: 20,
-                left: 30,
+                top: 30,
+                left: 180,
                 child: Text(
                   '$countri',
                   style: TextStyle(fontSize: 50, color: Colors.white),

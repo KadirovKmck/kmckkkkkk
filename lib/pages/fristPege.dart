@@ -1,8 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:kmckkkkkk/pages/second_page.dart';
 
 import 'homeVieu.dart';
 
@@ -27,7 +25,7 @@ class _firstPagesState extends State<firstPages> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('images/kkmck.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/images/kkmck.jpg'), fit: BoxFit.cover),
         ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           DefaultTextStyle(

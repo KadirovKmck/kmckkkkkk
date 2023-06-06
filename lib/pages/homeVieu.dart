@@ -48,7 +48,8 @@ class _HomeVieuState extends State<HomeVieu> {
     final kilvin = jsonJoop['main']['temp'];
     dus = kilvin - 275;
     countri = jsonJoop['sys']['country'];
-    setState(() {});
+    setState(() {
+    });
   }
 
   Future<void> GaradaaApp({String? Gorod}) async {
@@ -107,7 +108,7 @@ class _HomeVieuState extends State<HomeVieu> {
               Navigator.pop(context);
             },
             icon: Icon(
-              Icons.location_city,
+              Icons.location_city_rounded,
               size: 40,
             )),
         actions: [
@@ -118,7 +119,7 @@ class _HomeVieuState extends State<HomeVieu> {
                 GaradaaApp(Gorod: result);
               },
               icon: Icon(
-                Icons.map_sharp,
+                Icons.map,
                 size: 40,
               ))
         ],
@@ -133,8 +134,8 @@ class _HomeVieuState extends State<HomeVieu> {
           child: Stack(
             children: [
               Positioned(
-                bottom: 700,
-                left: 60,
+                bottom: 500,
+                left: 50,
                 child: Text(
                   '${dus.toStringAsFixed(0)}',
                   style: TextStyle(fontSize: 50, color: Colors.white),       
@@ -149,8 +150,8 @@ class _HomeVieuState extends State<HomeVieu> {
                 ),
               ),
               Positioned(
-                left: 135,
-                bottom: 700,
+                left: 120,
+                bottom: 500,
                 child: Text(
                   '🌤',
                   style: TextStyle(fontSize: 50, color: Colors.yellow),
@@ -215,5 +216,7 @@ class _HomeVieuState extends State<HomeVieu> {
             ],
           )),
     );
+    
   }
+  dispose();
 }

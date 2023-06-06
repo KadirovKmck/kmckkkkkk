@@ -53,7 +53,7 @@ class _SecondPageState extends State<SecondPage> {
                           onPressed: () {
                             _sendDataBack(context);        
                           },
-                          icon: Icon(Icons.arrow_forward_ios_outlined)),
+                          icon: Icon(Icons.arrow_back_ios_new)),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 10,
